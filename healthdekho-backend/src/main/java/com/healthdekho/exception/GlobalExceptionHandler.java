@@ -82,4 +82,16 @@ public ResponseEntity<ApiErrorResponse> handleCustomerNotFound(
             request.getRequestURI()
     );
 }
+
+@ExceptionHandler(ProductNotFoundException.class)
+public ResponseEntity<ApiErrorResponse> handleProductNotFound(
+        ProductNotFoundException exception,
+        HttpServletRequest request
+) {
+    return buildResponse(
+            HttpStatus.NOT_FOUND,
+            exception.getMessage(),
+            request.getRequestURI()
+    );
+}
 }

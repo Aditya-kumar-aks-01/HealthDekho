@@ -1,0 +1,20 @@
+# Java
+**/target/
+
+# React
+**/node_modules/
+**/dist/
+
+# Secrets
+.env
+.env.*
+!.env.example
+.aws/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db

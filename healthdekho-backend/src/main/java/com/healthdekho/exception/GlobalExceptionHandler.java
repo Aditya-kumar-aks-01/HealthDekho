@@ -94,4 +94,28 @@ public ResponseEntity<ApiErrorResponse> handleProductNotFound(
             request.getRequestURI()
     );
 }
+
+@ExceptionHandler(DuplicatePolicyException.class)
+public ResponseEntity<ApiErrorResponse> handleDuplicatePolicy(
+        DuplicatePolicyException exception,
+        HttpServletRequest request
+) {
+    return buildResponse(
+            HttpStatus.CONFLICT,
+            exception.getMessage(),
+            request.getRequestURI()
+    );
+}
+
+@ExceptionHandler(PolicyRegistrationException.class)
+public ResponseEntity<ApiErrorResponse> handlePolicyRegistration(
+        PolicyRegistrationException exception,
+        HttpServletRequest request
+) {
+    return buildResponse(
+            HttpStatus.BAD_REQUEST,
+            exception.getMessage(),
+            request.getRequestURI()
+    );
+}
 }

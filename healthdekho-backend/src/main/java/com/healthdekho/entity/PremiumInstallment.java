@@ -43,6 +43,23 @@ public class PremiumInstallment {
     protected PremiumInstallment() {
     }
 
+    public PremiumInstallment(
+        CustomerPolicy policy,
+        Integer installmentNumber,
+        LocalDate dueDate,
+        LocalDate gracePeriodEndDate,
+        BigDecimal scheduledAmount,
+        BigDecimal paidAmount,
+        String paymentStatus
+) {
+    this.policy = policy;
+    this.installmentNumber = installmentNumber;
+    this.dueDate = dueDate;
+    this.gracePeriodEndDate = gracePeriodEndDate;
+    this.scheduledAmount = scheduledAmount;
+    this.paidAmount = paidAmount;
+    this.paymentStatus = paymentStatus;
+}
     public Long getInstallmentId() {
         return installmentId;
     }

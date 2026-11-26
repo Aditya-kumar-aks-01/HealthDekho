@@ -57,6 +57,32 @@ public class CustomerPolicy {
     protected CustomerPolicy() {
     }
 
+    public CustomerPolicy(
+        String policyNumber,
+        Customer customer,
+        InsuranceProduct product,
+        LocalDate startDate,
+        LocalDate maturityDate,
+        String premiumFrequency,
+        BigDecimal premiumAmount,
+        BigDecimal sumInsured,
+        BigDecimal totalPremiumPayable,
+        String status,
+        OffsetDateTime createdAt
+) {
+    this.policyNumber = policyNumber;
+    this.customer = customer;
+    this.product = product;
+    this.startDate = startDate;
+    this.maturityDate = maturityDate;
+    this.premiumFrequency = premiumFrequency;
+    this.premiumAmount = premiumAmount;
+    this.sumInsured = sumInsured;
+    this.totalPremiumPayable = totalPremiumPayable;
+    this.status = status;
+    this.createdAt = createdAt;
+}
+
     public Long getPolicyId() {
         return policyId;
     }

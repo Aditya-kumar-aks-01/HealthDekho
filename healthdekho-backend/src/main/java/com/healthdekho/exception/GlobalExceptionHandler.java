@@ -118,4 +118,36 @@ public ResponseEntity<ApiErrorResponse> handlePolicyRegistration(
             request.getRequestURI()
     );
 }
+
+@ExceptionHandler(PaymentProcessingException.class)
+public ResponseEntity<ApiErrorResponse> handlePaymentProcessingException(
+        PaymentProcessingException ex,
+        HttpServletRequest request
+) {
+    ApiErrorResponse response = new ApiErrorResponse(
+            OffsetDateTime.now(),
+            400,
+            "Bad Request",
+            ex.getMessage(),
+            request.getRequestURI()
+    );
+
+    return ResponseEntity.badRequest().body(response);
+}
+
+@ExceptionHandler(PaymentNotFoundException.class)
+public ResponseEntity<ApiErrorResponse> handlePaymentNotFoundException(
+        PaymentNotFoundException ex,
+        HttpServletRequest request
+) {
+    ApiErrorResponse response = new ApiErrorResponse(
+            OffsetDateTime.now(),
+            404,
+            "Not Found",
+            ex.getMessage(),
+            request.getRequestURI()
+    );
+
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+}
 }

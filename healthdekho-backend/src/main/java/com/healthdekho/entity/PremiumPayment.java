@@ -35,7 +35,7 @@ public class PremiumPayment {
     @Column(name = "created_at", nullable = false)
     private OffsetDateTime createdAt;
 
-    public PremiumPayment() {
+    protected PremiumPayment() {
     }
 
     public Long getPaymentId() {

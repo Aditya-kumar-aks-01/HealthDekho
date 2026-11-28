@@ -30,7 +30,7 @@ private String recommendationReason;
     @Column(name = "selected_for_registration", nullable = false)
     private Boolean selectedForRegistration = false;
 
-    protected AiRecommendationItem() {
+    public AiRecommendationItem() {
     }
 
     public Long getRecommendationItemId() {

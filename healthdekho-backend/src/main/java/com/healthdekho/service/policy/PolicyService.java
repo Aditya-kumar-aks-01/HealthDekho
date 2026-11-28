@@ -3,7 +3,7 @@ package com.healthdekho.service.policy;
 
 import com.healthdekho.dto.policy.PolicyRegistrationRequest;
 import com.healthdekho.dto.policy.PolicyRegistrationResponse;
-
+import com.healthdekho.dto.policy.CustomerPolicyResponse;
 import com.healthdekho.entity.Customer;
 import com.healthdekho.entity.CustomerPolicy;
 import com.healthdekho.entity.InsuranceProduct;
@@ -137,6 +137,7 @@ public class PolicyService {
                     "Insurance product contains invalid financial details."
             );
         }
+        
 
         // 9. Determine the installment interval.
         int frequencyMonths = getFrequencyMonths(
@@ -226,6 +227,39 @@ public class PolicyService {
                 "Insurance policy registered successfully."
         );
     }
+
+@Transactional(readOnly = true)
+public List<CustomerPolicyResponse> getCustomerPolicies(String customerEmail) {
+
+    // Find the authenticated customer.
+    Customer customer = customerRepository.findByEmail(customerEmail)
+            .orElseThrow(() ->
+                    new CustomerNotFoundException("Customer not found.")
+            );
+
+    // Retrieve only this customer's policies.
+    List<CustomerPolicy> policies =
+            policyRepository.findByCustomer_CustomerId(
+                    customer.getCustomerId()
+            );
+
+    // Convert policy entities into response DTOs.
+    return policies.stream()
+            .map(policy -> new CustomerPolicyResponse(
+                    policy.getPolicyNumber(),
+                    policy.getProduct().getPolicyName(),
+                    policy.getProduct().getPolicyType(),
+                    policy.getProduct().getTermMonths(),
+                    policy.getStartDate(),
+                    policy.getMaturityDate(),
+                    policy.getPremiumFrequency(),
+                    policy.getPremiumAmount(),
+                    policy.getSumInsured(),
+                    policy.getStatus()
+            ))
+            .toList();
+}
+
 
     private int getFrequencyMonths(String frequency) {
 

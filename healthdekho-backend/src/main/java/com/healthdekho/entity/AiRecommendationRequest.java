@@ -45,7 +45,7 @@ private String insuranceGoals;
     @OneToMany(mappedBy = "recommendationRequest", fetch = FetchType.LAZY)
     private List<AiRecommendationItem> recommendationItems = new ArrayList<>();
 
-    protected AiRecommendationRequest() {
+    public AiRecommendationRequest() {
     }
 
     public Long getRecommendationRequestId() {

@@ -118,4 +118,16 @@ public ResponseEntity<ApiErrorResponse> handlePolicyRegistration(
             request.getRequestURI()
     );
 }
+
+@ExceptionHandler(AiRecommendationException.class)
+public ResponseEntity<ApiErrorResponse> handleAiRecommendation(
+        AiRecommendationException exception,
+        HttpServletRequest request
+) {
+    return buildResponse(
+            HttpStatus.BAD_GATEWAY,
+            exception.getMessage(),
+            request.getRequestURI()
+    );
+}
 }

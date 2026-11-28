@@ -15,6 +15,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import org.springframework.web.bind.annotation.*;
 
+import com.healthdekho.dto.policy.CustomerPolicyResponse;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/policies")
 public class PolicyController {
@@ -41,4 +45,16 @@ public class PolicyController {
                 .status(HttpStatus.CREATED)
                 .body(response);
     }
+
+
+@GetMapping
+public ResponseEntity<List<CustomerPolicyResponse>> getCustomerPolicies(
+        @AuthenticationPrincipal UserDetails userDetails
+) {
+    List<CustomerPolicyResponse> policies =
+            policyService.getCustomerPolicies(userDetails.getUsername());
+
+    return ResponseEntity.ok(policies);
+}
+
 }
